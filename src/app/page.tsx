@@ -146,7 +146,7 @@ export default function Home() {
           {/* Input X */}
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
             <InfoCard title="INPUT DATA (X) &mdash; DNA VARIANTS">
-              <p className="text-2xl font-semibold mb-4">~1,000,000 SNPs per person</p>
+              <p className="text-2xl font-semibold mb-4">~150,000 SNPs per person</p>
 
               <div className="space-y-4 text-zinc-300">
                 <div>
@@ -214,9 +214,9 @@ export default function Home() {
                   <p className="text-xl font-semibold">PCA (Unsupervised)</p>
                 </div>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  <span className="text-white">Why PCA?</span> With 1 million features and only 2,504 samples,
+                  <span className="text-white">Why PCA?</span> With 150,000 features and only 2,504 samples,
                   we have a severe &ldquo;curse of dimensionality&rdquo; problem. PCA finds the axes of maximum
-                  variance in the data, allowing us to compress 1M dimensions down to just 3 while
+                  variance in the data, allowing us to compress 150K dimensions down to just 3 while
                   preserving the structure that separates populations.
                 </p>
               </div>
@@ -294,10 +294,10 @@ export default function Home() {
               </p>
               <div className="flex items-center gap-2 text-sm">
                 <span className="text-zinc-500">Before:</span>
-                <span className="text-white">~1,000,000 SNPs</span>
+                <span className="text-white">~150,000 SNPs</span>
                 <span className="text-emerald-400">&rarr;</span>
                 <span className="text-zinc-500">After:</span>
-                <span className="text-emerald-400">~400,000 SNPs</span>
+                <span className="text-emerald-400">~60,000 SNPs</span>
               </div>
             </InfoCard>
 
@@ -309,10 +309,10 @@ export default function Home() {
               </p>
               <div className="flex items-center gap-2 text-sm">
                 <span className="text-zinc-500">Before:</span>
-                <span className="text-white">~400,000 SNPs</span>
+                <span className="text-white">~60,000 SNPs</span>
                 <span className="text-emerald-400">&rarr;</span>
                 <span className="text-zinc-500">After:</span>
-                <span className="text-emerald-400">~50,000 SNPs</span>
+                <span className="text-emerald-400">~15,000 SNPs</span>
               </div>
             </InfoCard>
           </div>
