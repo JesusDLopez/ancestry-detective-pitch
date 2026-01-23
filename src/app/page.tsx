@@ -146,7 +146,7 @@ export default function Home() {
           {/* Input X */}
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
             <InfoCard title="INPUT DATA (X) &mdash; DNA VARIANTS">
-              <p className="text-2xl font-semibold mb-4">~150,000 SNPs per person</p>
+              <p className="text-2xl font-semibold mb-4">~150,000 SNPs</p>
 
               <div className="space-y-4 text-zinc-300">
                 <div>
@@ -173,7 +173,7 @@ export default function Home() {
             </InfoCard>
 
             <InfoCard title="TARGET (y) &mdash; ANCESTRY LABELS">
-              <p className="text-2xl font-semibold mb-4">5 Super Populations</p>
+              <p className="text-2xl font-semibold mb-4">7 Global Regions</p>
 
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
@@ -201,88 +201,198 @@ export default function Home() {
                   <span className="font-medium">AMR</span>
                   <span className="text-zinc-400 text-sm">American (Indigenous) ancestry</span>
                 </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-3 h-3 bg-cyan-500 rounded-full"></span>
+                  <span className="font-medium">CSA</span>
+                  <span className="text-zinc-400 text-sm">Central/South Asian ancestry</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-3 h-3 bg-pink-500 rounded-full"></span>
+                  <span className="font-medium">OCE</span>
+                  <span className="text-zinc-400 text-sm">Oceanian ancestry</span>
+                </div>
               </div>
             </InfoCard>
           </div>
 
           {/* ML Approach */}
-          <InfoCard title="OUR ML APPROACH">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400 font-bold">1</div>
-                  <p className="text-xl font-semibold">PCA (Unsupervised)</p>
+          <InfoCard title="THE LEARNING PLAYGROUND">
+            <div className="space-y-8">
+              <p className="text-zinc-300 text-lg">
+                This project isn&apos;t just about one model; it&apos;s an arena for us to experiment,
+                benchmark, and learn as a 4-person team.
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400 font-bold">1</div>
+                    <p className="text-xl font-semibold">Model Benchmarking</p>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    <span className="text-white">Random Forest</span> is our baseline because it handles non-linear data well.
+                    But can we beat it? This setup allows us to easily plug in <span className="text-white">XGBoost</span>,
+                    <span className="text-white">SVMs</span>, or even a simple <span className="text-white">Neural Network</span> to compare performance.
+                  </p>
                 </div>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  <span className="text-white">Why PCA?</span> With 150,000 features and only 2,504 samples,
-                  we have a severe &ldquo;curse of dimensionality&rdquo; problem. PCA finds the axes of maximum
-                  variance in the data, allowing us to compress 150K dimensions down to just 3 while
-                  preserving the structure that separates populations.
+
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400 font-bold">2</div>
+                    <p className="text-xl font-semibold">PCA Deep Dives</p>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    It&apos;s not just a black box. We can analyze the <span className="text-white">explained variance ratio</span> to see how much
+                    signal we lose in 3D, or look at <span className="text-white">feature loadings</span> to identify exactly which SNPs drive the differences between populations.
+                  </p>
+                </div>
+              </div>
+
+              {/* Stretch Goal */}
+              <div className="bg-zinc-950 rounded-xl p-5 border border-amber-500/20">
+                <p className="font-semibold mb-2 text-amber-400">The &quot;Novembre 2008&quot; Stretch Goal</p>
+                <p className="text-zinc-400 text-sm mb-3">
+                  Can we recreate the famous <em>Nature</em> paper result where PCA coordinates
+                  perfectly reconstruct the map of Europe?
+                </p>
+                <p className="text-xs text-zinc-500">
+                  <span className="text-white font-medium">Data Source:</span> HGDP + 1kGP Harmonized (~4,094 samples).
+                  <br/>
+                  <span className="text-white font-medium">Goal:</span> Sub-continental prediction (e.g., France vs. Germany).
                 </p>
               </div>
 
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400 font-bold">2</div>
-                  <p className="text-xl font-semibold">Random Forest (Supervised)</p>
-                </div>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  <span className="text-white">Why Random Forest?</span> Once we have 3D coordinates from PCA,
-                  we train a classifier to predict the population label. Random Forest handles non-linear
-                  boundaries well and gives us probability estimates for each ancestry.
-                </p>
-              </div>
             </div>
           </InfoCard>
 
-          {/* Scope Note */}
-          <div className="mt-8 p-6 bg-zinc-900/50 border-l-4 border-amber-500 rounded-r-xl">
-            <p className="text-white font-medium mb-2">Project Scope: Chromosome 22 Only</p>
-            <p className="text-zinc-400">
-              For this project, we&apos;re focusing exclusively on <span className="text-white">Chromosome 22</span>.
-              This gives us enough genetic signal to accurately predict <span className="text-white">super populations</span> (continental-level ancestry),
-              but not finer-grained sub-populations. To distinguish between, say, Italian vs. German ancestry,
-              we&apos;d need data from all 22 chromosomes. However, for a two-week bootcamp project, Chr22 strikes
-              the perfect balance&mdash;computationally feasible while still delivering meaningful results.
-            </p>
-          </div>
         </div>
       </Section>
 
-      {/* Section 3 - The Data */}
+      {/* Section 3 - The Data Story */}
       <Section>
         <div className="max-w-5xl">
           <p className="text-emerald-400 font-mono mb-4">03 / THE DATA</p>
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            The 1000 Genomes Project
+            The Data Story
           </h2>
           <p className="text-xl text-zinc-400 mb-12 max-w-3xl">
-            An open-access catalog of human genetic variation from populations around the world.
+            Finding the right dataset was its own ML problem&mdash;balancing accuracy, diversity, and feasibility.
           </p>
 
-          <div className="grid grid-cols-3 gap-8 mb-12">
-            <DataPoint value="2,504" label="Individuals" />
-            <DataPoint value="26" label="Populations" />
-            <DataPoint value="5" label="Continents" />
+          {/* Three Act Data Journey */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {/* Act 1: The Prototype */}
+            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
+              <div className="text-3xl mb-4">&#x1F3C3;</div>
+              <p className="text-zinc-500 font-mono text-xs mb-2">ACT 1</p>
+              <h3 className="text-xl font-bold mb-2">The Prototype</h3>
+              <p className="text-emerald-400 font-semibold mb-1">1000 Genomes Chr22</p>
+              <p className="text-2xl font-bold text-white mb-3">196 MB</p>
+              <p className="text-zinc-400 text-sm">
+                Fast iteration, proof of concept. Single chromosome to validate the pipeline works.
+              </p>
+            </div>
+
+            {/* Act 2: The Monster */}
+            <div className="bg-zinc-900 rounded-2xl p-6 border border-red-500/30">
+              <div className="text-3xl mb-4">&#x1F480;</div>
+              <p className="text-zinc-500 font-mono text-xs mb-2">ACT 2</p>
+              <h3 className="text-xl font-bold mb-2">The Monster</h3>
+              <p className="text-red-400 font-semibold mb-1">HGDP+1kGP Raw VCF</p>
+              <p className="text-2xl font-bold text-white mb-3">55 GB <span className="text-sm text-zinc-500">(just Chr22!)</span></p>
+              <p className="text-zinc-400 text-sm">
+                Full genome = 1+ TB. Impossible for laptop or cloud free tier. We needed another way.
+              </p>
+            </div>
+
+            {/* Act 3: The Solution */}
+            <div className="bg-zinc-900 rounded-2xl p-6 border-2 border-emerald-500/50">
+              <div className="text-3xl mb-4">&#x2713;</div>
+              <p className="text-emerald-400 font-mono text-xs mb-2">ACT 3</p>
+              <h3 className="text-xl font-bold mb-2 text-emerald-400">The Solution</h3>
+              <p className="text-emerald-400 font-semibold mb-1">HGDP+1kGP PLINK Binary</p>
+              <p className="text-2xl font-bold text-white mb-3">180 MB <span className="text-sm text-emerald-400">(WHOLE GENOME!)</span></p>
+              <p className="text-zinc-400 text-sm">
+                LD-pruned, signal-focused, industry standard. This is what gnomAD uses.
+              </p>
+            </div>
           </div>
 
-          {/* VCF Format */}
-          <InfoCard title="DATA FORMAT &mdash; VCF (VARIANT CALL FORMAT)">
-            <p className="text-zinc-300 mb-4">
-              VCF is the industry-standard format for storing genetic variant data. Each row represents
-              a position in the genome where variation exists.
-            </p>
-            <div className="bg-zinc-950 rounded-lg p-4 font-mono text-xs overflow-x-auto">
-              <p className="text-zinc-500"># CHROM  POS      ID        REF  ALT  ...  SAMPLE1  SAMPLE2</p>
-              <p className="text-zinc-300">chr22    16050075 rs12345   A    G    ...  0/0      0/1</p>
-              <p className="text-zinc-300">chr22    16050115 rs67890   C    T    ...  1/1      0/1</p>
+          {/* Size Comparison Visualization */}
+          <div className="bg-zinc-900/50 rounded-2xl p-6 mb-12">
+            <p className="text-zinc-400 font-mono text-sm mb-4">SIZE COMPARISON</p>
+            <div className="space-y-4">
+              <div>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-zinc-400">Raw VCF (Chr22 only)</span>
+                  <span className="text-red-400">55 GB</span>
+                </div>
+                <div className="h-4 bg-zinc-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-red-500/70 rounded-full" style={{ width: '100%' }} />
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-zinc-400">PLINK Binary (ALL 22 chromosomes)</span>
+                  <span className="text-emerald-400">180 MB</span>
+                </div>
+                <div className="h-4 bg-zinc-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-emerald-500 rounded-full" style={{ width: '0.33%' }} />
+                </div>
+              </div>
             </div>
-            <p className="text-zinc-500 text-sm mt-3">
-              <span className="text-emerald-400">0/0</span> = homozygous reference,
-              <span className="text-emerald-400 ml-2">0/1</span> = heterozygous,
-              <span className="text-emerald-400 ml-2">1/1</span> = homozygous alternate
+            <p className="text-zinc-500 text-xs mt-4">
+              The PLINK format achieves 300x compression by storing only LD-pruned, signal-focused SNPs in binary format.
             </p>
-          </InfoCard>
+          </div>
+
+          {/* Updated Stats */}
+          <div className="grid grid-cols-3 gap-8 mb-12">
+            <DataPoint value="4,094" label="Individuals" />
+            <DataPoint value="80" label="Populations" />
+            <DataPoint value="7" label="Global Regions" />
+          </div>
+
+          {/* Data Formats */}
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <InfoCard title="INPUT FORMAT &mdash; VCF (VARIANT CALL FORMAT)">
+              <p className="text-zinc-300 mb-4">
+                VCF is the industry-standard format for storing genetic variant data. Each row represents
+                a position in the genome where variation exists.
+              </p>
+              <div className="bg-zinc-950 rounded-lg p-4 font-mono text-xs overflow-x-auto">
+                <p className="text-zinc-500"># CHROM  POS      ID        REF  ALT  ...  SAMPLE1  SAMPLE2</p>
+                <p className="text-zinc-300">chr1     16050075 rs12345   A    G    ...  0/0      0/1</p>
+                <p className="text-zinc-300">chr1     16050115 rs67890   C    T    ...  1/1      0/1</p>
+              </div>
+              <p className="text-zinc-500 text-sm mt-3">
+                <span className="text-emerald-400">0/0</span> = homozygous reference,
+                <span className="text-emerald-400 ml-2">0/1</span> = heterozygous,
+                <span className="text-emerald-400 ml-2">1/1</span> = homozygous alternate
+              </p>
+            </InfoCard>
+
+            <InfoCard title="OPTIMIZED FORMAT &mdash; PLINK BINARY">
+              <p className="text-zinc-300 mb-4">
+                PLINK binary format (.bed/.bim/.fam) is the gold standard for genome-wide data.
+                Stores genotypes in 2-bit encoding for extreme compression.
+              </p>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-400 font-mono">.bed</span>
+                  <span className="text-zinc-400">Binary genotype matrix (2 bits per call)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-400 font-mono">.bim</span>
+                  <span className="text-zinc-400">SNP info (chromosome, position, alleles)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-400 font-mono">.fam</span>
+                  <span className="text-zinc-400">Sample info (ID, population, sex)</span>
+                </div>
+              </div>
+            </InfoCard>
+          </div>
 
           {/* Preprocessing */}
           <div className="grid md:grid-cols-2 gap-8 mt-8">
@@ -293,39 +403,25 @@ export default function Home() {
                 These rare variants are often sequencing errors or provide no population-level signal.
               </p>
               <div className="flex items-center gap-2 text-sm">
-                <span className="text-zinc-500">Before:</span>
-                <span className="text-white">~150,000 SNPs</span>
+                <span className="text-zinc-500">Genome-wide:</span>
+                <span className="text-white">~50M Variants</span>
                 <span className="text-emerald-400">&rarr;</span>
-                <span className="text-zinc-500">After:</span>
-                <span className="text-emerald-400">~60,000 SNPs</span>
+                <span className="text-emerald-400">~5M common SNPs</span>
               </div>
             </InfoCard>
 
             <InfoCard title="PREPROCESSING STEP 2 &mdash; LD PRUNING">
               <p className="text-white font-medium mb-2">Linkage Disequilibrium Pruning</p>
               <p className="text-zinc-400 text-sm mb-4">
-                Nearby SNPs are often correlated (inherited together). We remove redundant SNPs
-                to avoid double-counting the same genetic signal, which would bias PCA.
+                Nearby SNPs are often correlated (inherited together). LD pruning removes redundant SNPs,
+                which is why the PLINK file is so compact while preserving signal.
               </p>
               <div className="flex items-center gap-2 text-sm">
-                <span className="text-zinc-500">Before:</span>
-                <span className="text-white">~60,000 SNPs</span>
-                <span className="text-emerald-400">&rarr;</span>
-                <span className="text-zinc-500">After:</span>
-                <span className="text-emerald-400">~15,000 SNPs</span>
+                <span className="text-zinc-500">After LD pruning:</span>
+                <span className="text-emerald-400">~150,000 SNPs</span>
+                <span className="text-zinc-500">(signal-focused)</span>
               </div>
             </InfoCard>
-          </div>
-
-          {/* Why Chr22 */}
-          <div className="mt-8 p-6 bg-zinc-900/50 border-l-4 border-emerald-500 rounded-r-xl">
-            <p className="text-white font-medium mb-2">Why Chromosome 22 specifically?</p>
-            <p className="text-zinc-400">
-              Chromosome 22 is the smallest autosome (~1% of the genome), making it computationally
-              tractable on a laptop (~450MB). Despite its size, it contains enough variants to
-              achieve &gt;95% accuracy in continental ancestry prediction. It&apos;s the perfect balance
-              of signal and feasibility for a bootcamp project.
-            </p>
           </div>
 
           {/* Validation Badge */}
@@ -335,10 +431,10 @@ export default function Home() {
               <span className="text-emerald-400 font-semibold">Data Validation: PASSED</span>
             </div>
             <ul className="text-zinc-400 space-y-2 text-sm">
-              <li>FTP download links verified and working</li>
-              <li>Panel file loaded: 2,504 samples across 5 super populations</li>
-              <li>scikit-allel confirmed to parse VCF format</li>
-              <li>No API limits &mdash; data sits locally on disk</li>
+              <li>HGDP+1kGP PLINK files downloaded from gnomAD</li>
+              <li>4,094 samples across 80 populations, 7 global regions</li>
+              <li>~150,000 LD-pruned SNPs covering all 22 autosomes</li>
+              <li>180 MB total &mdash; fits comfortably on laptop</li>
             </ul>
           </div>
         </div>
@@ -489,11 +585,19 @@ export default function Home() {
                 </div>
 
                 <div className="bg-zinc-900 rounded-xl p-5">
-                  <p className="font-semibold mb-2">Plotly.js</p>
+                  <p className="font-semibold mb-2">Plotly.js (The MVP)</p>
                   <p className="text-zinc-400 text-sm">
-                    Interactive 3D visualization library. Renders the PCA scatter plot where
-                    users can rotate, zoom, and explore the ancestry clusters. The &ldquo;wow factor&rdquo;
-                    of our demo.
+                    Our baseline for scientific visualization. It handles 3D scatter plots cleanly
+                    out of the box, allowing us to focus on the data pipeline first.
+                  </p>
+                </div>
+
+                <div className="bg-zinc-900 rounded-xl p-5 border border-emerald-500/20">
+                  <p className="font-semibold mb-2 text-emerald-400">Three.js / Fiber (The Stretch ?)</p>
+                  <p className="text-zinc-400 text-sm">
+                    If we nail the MVP, we level up to a custom cinematic experience with
+                    React Three Fiber. Custom shaders, glowing particles, and &ldquo;Apple-style&rdquo;
+                    smoothness.
                   </p>
                 </div>
 
