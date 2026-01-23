@@ -64,9 +64,20 @@ export default function Home() {
             The Ancestry
             <span className="block text-emerald-400">Detective</span>
           </h1>
-          <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto mb-6">
             Unlocking Human History with Unsupervised Learning
           </p>
+          <a
+            href="https://github.com/JesusDLopez/ancestry-detective-pitch"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-zinc-500 hover:text-emerald-400 transition-colors font-mono text-sm"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+            </svg>
+            github.com/JesusDLopez/ancestry-detective-pitch
+          </a>
         </motion.div>
 
         <motion.div
@@ -215,6 +226,32 @@ export default function Home() {
             </InfoCard>
           </div>
 
+          {/* ML Context Box */}
+          <div className="bg-zinc-900/50 rounded-2xl p-6 mb-8 border border-zinc-800">
+            <p className="text-emerald-400 font-mono text-sm mb-4">IN ML TERMS</p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl font-bold text-white">4,094</span>
+                  <span className="text-zinc-400">participants = <span className="text-emerald-400">observations</span> (rows)</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl font-bold text-white">~150k</span>
+                  <span className="text-zinc-400">SNPs = <span className="text-emerald-400">features</span> (columns)</span>
+                </div>
+              </div>
+              <div className="space-y-2 text-sm">
+                <p className="text-zinc-300">
+                  <span className="text-amber-400 font-semibold">Classic &quot;wide data&quot; problem</span> &mdash; features &gt;&gt; observations
+                </p>
+                <p className="text-zinc-400">
+                  <span className="text-white">Why it works:</span> PCA is designed exactly for this scenario.
+                  It finds the directions of maximum variance regardless of dimensionality.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* ML Approach */}
           <InfoCard title="THE LEARNING PLAYGROUND">
             <div className="space-y-8">
@@ -227,38 +264,40 @@ export default function Home() {
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400 font-bold">1</div>
-                    <p className="text-xl font-semibold">Model Benchmarking</p>
+                    <p className="text-xl font-semibold">PCA & Dimensionality Reduction</p>
                   </div>
                   <p className="text-zinc-400 text-sm leading-relaxed">
-                    <span className="text-white">Random Forest</span> is our baseline because it handles non-linear data well.
-                    But can we beat it? This setup allows us to easily plug in <span className="text-white">XGBoost</span>,
-                    <span className="text-white">SVMs</span>, or even a simple <span className="text-white">Neural Network</span> to compare performance.
+                    <span className="text-white">Unsupervised learning first.</span> We&apos;ll use PCA to compress 150k features into
+                    3 dimensions that capture the genetic structure. We can analyze <span className="text-white">explained variance</span> and
+                    <span className="text-white"> feature loadings</span> to understand which SNPs matter most.
                   </p>
                 </div>
 
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400 font-bold">2</div>
-                    <p className="text-xl font-semibold">PCA Deep Dives</p>
+                    <p className="text-xl font-semibold">Classification Models</p>
                   </div>
                   <p className="text-zinc-400 text-sm leading-relaxed">
-                    It&apos;s not just a black box. We can analyze the <span className="text-white">explained variance ratio</span> to see how much
-                    signal we lose in 3D, or look at <span className="text-white">feature loadings</span> to identify exactly which SNPs drive the differences between populations.
+                    <span className="text-white">Supervised learning second.</span> <span className="text-white">Random Forest</span> is our baseline.
+                    The setup allows us to easily plug in <span className="text-white">XGBoost</span>,
+                    <span className="text-white"> SVMs</span>, or a <span className="text-white">Neural Network</span> to compare performance.
                   </p>
                 </div>
               </div>
 
-              {/* Stretch Goal */}
+              {/* Research Comparison - Reframed */}
               <div className="bg-zinc-950 rounded-xl p-5 border border-amber-500/20">
-                <p className="font-semibold mb-2 text-amber-400">The &quot;Novembre 2008&quot; Stretch Goal</p>
+                <p className="font-semibold mb-2 text-amber-400">Standing on Giants&apos; Shoulders</p>
                 <p className="text-zinc-400 text-sm mb-3">
-                  Can we recreate the famous <em>Nature</em> paper result where PCA coordinates
-                  perfectly reconstruct the map of Europe?
+                  This dataset (HGDP+1kGP) has been used by researchers for years. Papers like
+                  <em className="text-white"> &quot;Genes Mirror Geography&quot;</em> (Novembre et al., 2008) provide benchmarks
+                  we can compare our results against.
                 </p>
                 <p className="text-xs text-zinc-500">
-                  <span className="text-white font-medium">Data Source:</span> HGDP + 1kGP Harmonized (~4,094 samples).
+                  <span className="text-amber-400 font-medium">Extra Goal:</span> Validate our PCA results and clustering accuracy against published research.
                   <br/>
-                  <span className="text-white font-medium">Goal:</span> Sub-continental prediction (e.g., France vs. Germany).
+                  <span className="text-amber-400 font-medium">Stretch:</span> Sub-continental prediction (e.g., France vs. Germany).
                 </p>
               </div>
 
@@ -394,34 +433,40 @@ export default function Home() {
             </InfoCard>
           </div>
 
-          {/* Preprocessing */}
-          <div className="grid md:grid-cols-2 gap-8 mt-8">
-            <InfoCard title="PREPROCESSING STEP 1 &mdash; MAF FILTERING">
-              <p className="text-white font-medium mb-2">Minor Allele Frequency Filter</p>
-              <p className="text-zinc-400 text-sm mb-4">
-                We remove SNPs where the less common variant appears in fewer than 1% of people.
-                These rare variants are often sequencing errors or provide no population-level signal.
-              </p>
-              <div className="flex items-center gap-2 text-sm">
-                <span className="text-zinc-500">Genome-wide:</span>
-                <span className="text-white">~50M Variants</span>
-                <span className="text-emerald-400">&rarr;</span>
-                <span className="text-emerald-400">~5M common SNPs</span>
-              </div>
-            </InfoCard>
+          {/* Preprocessing - Reframed */}
+          <div className="mt-8">
+            <div className="flex items-center gap-3 mb-6">
+              <p className="text-emerald-400 font-mono text-sm">PREPROCESSED BY GNOMAD</p>
+              <span className="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-1 rounded-full">Ready to Use</span>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <InfoCard title="MAF FILTERING &mdash; ALREADY DONE">
+                <p className="text-white font-medium mb-2">Minor Allele Frequency Filter</p>
+                <p className="text-zinc-400 text-sm mb-4">
+                  gnomAD removed SNPs where the less common variant appears in fewer than 1% of people.
+                  These rare variants are often sequencing errors or provide no population-level signal.
+                </p>
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="text-emerald-400">&#x2713;</span>
+                  <span className="text-zinc-400">~50M Variants &rarr; ~5M common SNPs</span>
+                </div>
+              </InfoCard>
 
-            <InfoCard title="PREPROCESSING STEP 2 &mdash; LD PRUNING">
-              <p className="text-white font-medium mb-2">Linkage Disequilibrium Pruning</p>
-              <p className="text-zinc-400 text-sm mb-4">
-                Nearby SNPs are often correlated (inherited together). LD pruning removes redundant SNPs,
-                which is why the PLINK file is so compact while preserving signal.
-              </p>
-              <div className="flex items-center gap-2 text-sm">
-                <span className="text-zinc-500">After LD pruning:</span>
-                <span className="text-emerald-400">~150,000 SNPs</span>
-                <span className="text-zinc-500">(signal-focused)</span>
-              </div>
-            </InfoCard>
+              <InfoCard title="LD PRUNING &mdash; ALREADY DONE">
+                <p className="text-white font-medium mb-2">Linkage Disequilibrium Pruning</p>
+                <p className="text-zinc-400 text-sm mb-4">
+                  gnomAD removed redundant correlated SNPs. This is why the PLINK file is so compact
+                  while preserving the genetic signal we need.
+                </p>
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="text-emerald-400">&#x2713;</span>
+                  <span className="text-zinc-400">Result: ~150,000 signal-focused SNPs</span>
+                </div>
+              </InfoCard>
+            </div>
+            <p className="text-zinc-500 text-sm mt-4 text-center italic">
+              No preprocessing required on our end &mdash; we&apos;re using the result of gnomAD&apos;s careful curation.
+            </p>
           </div>
 
           {/* Validation Badge */}
@@ -440,19 +485,95 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Section 4 - The Demo */}
+      {/* Section 4 - The Deliverables */}
       <Section>
         <div className="max-w-5xl">
-          <p className="text-emerald-400 font-mono mb-4">04 / THE DEMO</p>
+          <p className="text-emerald-400 font-mono mb-4">04 / THE DELIVERABLES</p>
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Interactive 3D Ancestry Map
+            What We&apos;ll Build
           </h2>
           <p className="text-xl text-zinc-400 mb-12 max-w-3xl">
-            The end product: a web app where users can upload their genetic data and see
-            their predicted ancestry visualized in 3D space.
+            Clear separation between must-have deliverables and stretch goals.
           </p>
 
+          {/* MVP Section */}
+          <div className="bg-zinc-900 rounded-2xl p-8 mb-8 border-2 border-emerald-500/50">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-3 h-3 rounded-full bg-emerald-400" />
+              <p className="text-emerald-400 font-mono text-sm">THE CORE PRODUCT (MVP)</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-emerald-400 font-bold">1.</span>
+                  <div>
+                    <p className="font-semibold text-white">PCA on HGDP+1kGP Data</p>
+                    <p className="text-zinc-400 text-sm">Compress 150k features &rarr; 3D coordinates</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-emerald-400 font-bold">2.</span>
+                  <div>
+                    <p className="font-semibold text-white">3D Visualization with Plotly</p>
+                    <p className="text-zinc-400 text-sm">Interactive scatter plot showing population clusters</p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-emerald-400 font-bold">3.</span>
+                  <div>
+                    <p className="font-semibold text-white">Random Forest Classifier</p>
+                    <p className="text-zinc-400 text-sm">Baseline model for ancestry prediction</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-emerald-400 font-bold">4.</span>
+                  <div>
+                    <p className="font-semibold text-white">Simple Web Interface</p>
+                    <p className="text-zinc-400 text-sm">View results with pre-computed reference positions</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Extras Section */}
+          <div className="bg-zinc-900 rounded-2xl p-8 mb-12 border border-amber-500/30">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-3 h-3 rounded-full bg-amber-400" />
+              <p className="text-amber-400 font-mono text-sm">STRETCH GOALS (IF TIME PERMITS)</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="bg-zinc-950 rounded-lg p-4">
+                <p className="font-medium text-white text-sm mb-1">Research Validation</p>
+                <p className="text-zinc-500 text-xs">Compare results against Novembre 2008</p>
+              </div>
+              <div className="bg-zinc-950 rounded-lg p-4">
+                <p className="font-medium text-white text-sm mb-1">Three.js Visualization</p>
+                <p className="text-zinc-500 text-xs">Cinematic 3D experience with custom shaders</p>
+              </div>
+              <div className="bg-zinc-950 rounded-lg p-4">
+                <p className="font-medium text-white text-sm mb-1">Model Benchmarking</p>
+                <p className="text-zinc-500 text-xs">XGBoost, SVM, Neural Network comparison</p>
+              </div>
+              <div className="bg-zinc-950 rounded-lg p-4">
+                <p className="font-medium text-white text-sm mb-1">Sub-continental Predictions</p>
+                <p className="text-zinc-500 text-xs">European country-level ancestry (France vs Germany)</p>
+              </div>
+              <div className="bg-zinc-950 rounded-lg p-4">
+                <p className="font-medium text-white text-sm mb-1">Feature Importance</p>
+                <p className="text-zinc-500 text-xs">Which SNPs matter most for classification</p>
+              </div>
+              <div className="bg-zinc-950 rounded-lg p-4">
+                <p className="font-medium text-white text-sm mb-1">Real-time Upload</p>
+                <p className="text-zinc-500 text-xs">User uploads VCF, sees prediction live</p>
+              </div>
+            </div>
+          </div>
+
           {/* 3D Visualization Placeholder */}
+          <h3 className="text-xl font-semibold mb-6">The End Result</h3>
           <div className="relative aspect-video bg-zinc-900 rounded-2xl overflow-hidden mb-8">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="relative">
@@ -488,38 +609,35 @@ export default function Home() {
           <h3 className="text-xl font-semibold mb-6">How It Works</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <InfoCard title="STEP 1">
-              <p className="text-xl font-semibold mb-3">Upload VCF File</p>
+              <p className="text-xl font-semibold mb-3">Load Reference Data</p>
               <p className="text-zinc-400 text-sm">
-                The user uploads their raw genetic data file. This is the same format you get
-                when you download your data from 23andMe or AncestryDNA. It contains their
-                genotype calls at hundreds of thousands of positions.
+                Pre-computed PCA coordinates for 4,094 reference individuals from HGDP+1kGP.
+                These form the baseline clusters we compare against.
               </p>
               <p className="text-zinc-500 text-xs mt-3 font-mono">
-                Input: .vcf or .vcf.gz file (~20MB)
+                Input: Pre-computed .joblib model + coordinates
               </p>
             </InfoCard>
 
             <InfoCard title="STEP 2">
-              <p className="text-xl font-semibold mb-3">Parse & Transform</p>
+              <p className="text-xl font-semibold mb-3">Visualize Clusters</p>
               <p className="text-zinc-400 text-sm">
-                The backend extracts genotypes from the VCF, filters to the SNPs our model
-                knows about, and applies the pre-trained PCA transformation to project the
-                new sample into 3D space.
+                Render the 3D scatter plot with Plotly. Each population forms a distinct cluster,
+                revealing the genetic structure across continental ancestries.
               </p>
               <p className="text-zinc-500 text-xs mt-3 font-mono">
-                VCF &rarr; numpy array &rarr; PCA transform &rarr; [x, y, z]
+                Output: Interactive 3D visualization
               </p>
             </InfoCard>
 
             <InfoCard title="STEP 3">
-              <p className="text-xl font-semibold mb-3">Predict & Visualize</p>
+              <p className="text-xl font-semibold mb-3">Predict Ancestry</p>
               <p className="text-zinc-400 text-sm">
-                The Random Forest classifier predicts the most likely ancestry. The user sees
-                their dot appear on the 3D map, positioned among the reference populations,
-                with probability scores for each ancestry.
+                Random Forest classifier trained on reference data predicts continental ancestry.
+                Shows probability scores for each region.
               </p>
               <p className="text-zinc-500 text-xs mt-3 font-mono">
-                Output: &ldquo;You are 94% East Asian&rdquo;
+                Output: &ldquo;94% East Asian, 4% Central Asian...&rdquo;
               </p>
             </InfoCard>
           </div>
@@ -534,7 +652,7 @@ export default function Home() {
             How We&apos;ll Build It
           </h2>
           <p className="text-xl text-zinc-400 mb-12 max-w-3xl">
-            Our tech stack and what each tool does in the pipeline.
+            Our tech stack &mdash; MVP tools highlighted in green, stretch goals in amber.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -543,29 +661,37 @@ export default function Home() {
               <h3 className="text-zinc-400 font-mono text-sm mb-6">BACKEND (PYTHON)</h3>
 
               <div className="space-y-4">
-                <div className="bg-zinc-900 rounded-xl p-5">
-                  <p className="font-semibold mb-2">scikit-allel</p>
+                <div className="bg-zinc-900 rounded-xl p-5 border border-emerald-500/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <p className="font-semibold">pandas-plink</p>
+                    <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">MVP</span>
+                  </div>
                   <p className="text-zinc-400 text-sm">
-                    Specialized library for parsing VCF files into numpy arrays. Handles the
-                    complex genotype encoding and can efficiently process large genomic datasets.
+                    Reads PLINK binary files (.bed/.bim/.fam) directly into pandas DataFrames.
+                    Perfect for the pre-processed gnomAD data we&apos;re using.
                   </p>
                 </div>
 
-                <div className="bg-zinc-900 rounded-xl p-5">
-                  <p className="font-semibold mb-2">scikit-learn</p>
+                <div className="bg-zinc-900 rounded-xl p-5 border border-emerald-500/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <p className="font-semibold">scikit-learn</p>
+                    <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">MVP</span>
+                  </div>
                   <p className="text-zinc-400 text-sm">
-                    The core ML library. We&apos;ll use <code className="text-emerald-400">PCA</code> for
-                    dimensionality reduction and <code className="text-emerald-400">RandomForestClassifier</code> for
-                    ancestry prediction. Models are saved as <code className="text-emerald-400">.joblib</code> files.
+                    The core ML library. <code className="text-emerald-400">PCA</code> for
+                    dimensionality reduction, <code className="text-emerald-400">RandomForestClassifier</code> for
+                    predictions. Models saved as <code className="text-emerald-400">.joblib</code>.
                   </p>
                 </div>
 
-                <div className="bg-zinc-900 rounded-xl p-5">
-                  <p className="font-semibold mb-2">FastAPI</p>
+                <div className="bg-zinc-900 rounded-xl p-5 border border-amber-500/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <p className="font-semibold text-amber-400">FastAPI</p>
+                    <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded">STRETCH</span>
+                  </div>
                   <p className="text-zinc-400 text-sm">
-                    Modern Python web framework for serving our model as a REST API.
-                    Exposes a <code className="text-emerald-400">POST /predict</code> endpoint that accepts
-                    VCF data and returns ancestry predictions.
+                    For real-time uploads: REST API that accepts VCF data and returns ancestry predictions.
+                    Only needed if we implement live upload feature.
                   </p>
                 </div>
               </div>
@@ -576,36 +702,36 @@ export default function Home() {
               <h3 className="text-zinc-400 font-mono text-sm mb-6">FRONTEND (REACT)</h3>
 
               <div className="space-y-4">
-                <div className="bg-zinc-900 rounded-xl p-5">
-                  <p className="font-semibold mb-2">Next.js</p>
+                <div className="bg-zinc-900 rounded-xl p-5 border border-emerald-500/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <p className="font-semibold">Next.js + Tailwind</p>
+                    <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">MVP</span>
+                  </div>
                   <p className="text-zinc-400 text-sm">
-                    React framework for building the user interface. Handles file uploads,
-                    API calls to the backend, and rendering the results page.
+                    React framework for building the UI. Clean, consistent styling
+                    with Tailwind CSS utilities.
                   </p>
                 </div>
 
-                <div className="bg-zinc-900 rounded-xl p-5">
-                  <p className="font-semibold mb-2">Plotly.js (The MVP)</p>
+                <div className="bg-zinc-900 rounded-xl p-5 border border-emerald-500/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <p className="font-semibold">Plotly.js</p>
+                    <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">MVP</span>
+                  </div>
                   <p className="text-zinc-400 text-sm">
-                    Our baseline for scientific visualization. It handles 3D scatter plots cleanly
-                    out of the box, allowing us to focus on the data pipeline first.
+                    Scientific visualization baseline. Handles 3D scatter plots with
+                    zoom, rotation, and hover info out of the box.
                   </p>
                 </div>
 
-                <div className="bg-zinc-900 rounded-xl p-5 border border-emerald-500/20">
-                  <p className="font-semibold mb-2 text-emerald-400">Three.js / Fiber (The Stretch ?)</p>
+                <div className="bg-zinc-900 rounded-xl p-5 border border-amber-500/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <p className="font-semibold text-amber-400">Three.js / React Three Fiber</p>
+                    <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded">STRETCH</span>
+                  </div>
                   <p className="text-zinc-400 text-sm">
-                    If we nail the MVP, we level up to a custom cinematic experience with
-                    React Three Fiber. Custom shaders, glowing particles, and &ldquo;Apple-style&rdquo;
-                    smoothness.
-                  </p>
-                </div>
-
-                <div className="bg-zinc-900 rounded-xl p-5">
-                  <p className="font-semibold mb-2">Tailwind CSS</p>
-                  <p className="text-zinc-400 text-sm">
-                    Utility-first CSS framework for rapid UI development. Keeps our frontend
-                    code clean and consistent without writing custom stylesheets.
+                    Cinematic upgrade: custom shaders, glowing particles, smooth
+                    camera animations, &ldquo;Apple-style&rdquo; polish.
                   </p>
                 </div>
               </div>
@@ -621,7 +747,7 @@ export default function Home() {
                 <p className="text-zinc-400">Vercel (free tier) &mdash; automatic deploys from GitHub</p>
               </div>
               <div>
-                <p className="text-emerald-400 font-mono mb-2">BACKEND</p>
+                <p className="text-emerald-400 font-mono mb-2">BACKEND (IF NEEDED)</p>
                 <p className="text-zinc-400">Render or Google Cloud Run &mdash; containerized FastAPI</p>
               </div>
             </div>
